@@ -19,12 +19,16 @@ jobs:
           docker build -t kc114414/react-test -f ./client/Dockerfile.dev ./client
           docker run -e CI=true kc114414/react-test npm test
  
-      - name: Set Service Key
+#      - name: Set Service Key
+#        uses: 'google-github-actions/auth@v0'
+#        with:
+#          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      - name: Set Workload Identity Provider
         uses: 'google-github-actions/auth@v0'
         with:
-          credentials_json: '${{ secrets.GKE_SA_KEY }}'
- 
-      - name: Set Project
+          workload_identity_provider: 'projects/427579210736/locations/global/workloadIdentityPools/mc-pool/providers/mc-provider'
+          service_account: 'gha-deployer@multi-k8s-364413.iam.gserviceaccount.com'
         uses: google-github-actions/setup-gcloud@v0
         with:
           project_id: multi-k8s-364413
@@ -37,7 +41,7 @@ jobs:
         uses: google-github-actions/get-gke-credentials@v0
         with:
           cluster_name: multi-cluster
-          location: us-central1-c
+          location: europe-west4-c
  
       - name: Build
         run: |-
