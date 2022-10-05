@@ -29,6 +29,8 @@ jobs:
         with:
           workload_identity_provider: 'projects/427579210736/locations/global/workloadIdentityPools/mc-pool/providers/mc-provider'
           service_account: 'gha-deployer@multi-k8s-364413.iam.gserviceaccount.com'
+        
+      - name: Set Project
         uses: google-github-actions/setup-gcloud@v0
         with:
           project_id: multi-k8s-364413
