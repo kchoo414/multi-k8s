@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+ 
+kind: Certificate
+metadata:
+  name: racialdyslexia-com-tls
+spec:
+  secretName: racialdyslexia-com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: racialdyslexia.com
+  dnsNames:
+    - racialdyslexia.com
+    - www.racialdyslexia.com
